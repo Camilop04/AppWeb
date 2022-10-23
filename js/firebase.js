@@ -1,6 +1,6 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.9.3/firebase-app.js';
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword} from 'https://www.gstatic.com/firebasejs/9.9.3/firebase-auth.js';
-import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.9.3/firebase-firestore.js";
+import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/9.9.3/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCArXocJJn601tvJ_m7gk4J90yDCZcfTII",
@@ -14,7 +14,23 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig); 
 const auth = getAuth();
+
 const db = getFirestore();
 
 export const loginvalidation=(email,password)=>signInWithEmailAndPassword(auth,email,password)
 export const registeruser=(email,password)=>createUserWithEmailAndPassword(auth,email,password)
+
+export const registersetdoc=(nombre,cedula,direccion,telefono,departamento,ciudad,Rh,genero,email,confemail,pass,confpass)=>{
+  setDoc(doc(db,"listregistros",cedula),{
+  nombre,
+  cedula,
+  direccion,
+  telefono,
+  departamento,
+  ciudad,
+  Rh,
+  genero,
+  email,
+  confemail,
+  pass,
+  confpass})}
